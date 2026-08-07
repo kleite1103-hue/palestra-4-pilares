@@ -170,6 +170,13 @@
     .cover .ghostnum{opacity:.5}
     .chrome,.navbtns{padding:0 7vw} .navbtns{right:7vw}
   }
+
+  .cta-wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:5vw;align-items:center;width:100%}
+  .cta-handle{margin-top:3vh;display:inline-block;font-family:'Space Mono',monospace;letter-spacing:.2em;text-transform:uppercase;font-size:clamp(.9rem,1.3vw,1.2rem);color:var(--orange);border:1px solid var(--orange);border-radius:999px;padding:1.2vh 1.6vw}
+  .cta-qr{display:flex;flex-direction:column;align-items:center;gap:1.6vh}
+  .qr-box{width:min(30vh,260px);aspect-ratio:1;border:2px dashed rgba(255,255,255,.25);border-radius:20px;display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Space Mono',monospace;font-size:clamp(.8rem,1.1vw,1rem);letter-spacing:.14em;color:var(--muted2);line-height:1.6;background:var(--bg2)}
+  .qr-cap{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted2)}
+  @media (max-width:900px){.cta-wrap{grid-template-columns:1fr;gap:4vh}.cta-qr{order:-1}}
 </style>
 </head>
 <body>
@@ -259,7 +266,7 @@
   <section class="slide" data-phase="Pilar 01 · Conexão">
     <div class="glow p"></div>
     <div class="eyebrow">Pra quem eu vendo</div>
-    <h2 class="xl" style="max-width:18ch">Quem recebe<br>o seu <span class="o">produto?</span></h2>
+    <h2 class="xl" style="max-width:18ch">Quem compra<br>o seu <span class="o">produto?</span></h2>
     <p class="body ink" style="margin-top:4vh;max-width:56ch">O que essa pessoa precisa? O que ela quer resolver? Característica e benefício do produto só têm força quando falam <b>diretamente</b> com quem vai comprar. É isso que conecta o seu produto a ela.</p>
   </section>
 
@@ -401,24 +408,13 @@
       </div>
       <div class="box money">
         <div class="tag">Outras cobram</div><div class="h">Dinheiro</div>
-        <div class="d">Ads e afiliado pedem investimento, e por isso te dão <b>controle</b>. Com dinheiro você mede: sabe quanto investiu, quanto voltou, e quanto custou cada cliente. É aqui que a próxima conta aparece.</div>
+        <div class="d">Ads e afiliado pedem investimento, e por isso te dão <b>controle</b>. Com dinheiro você mede: sabe quanto investiu, quanto voltou, e quanto custou cada cliente. Vira conta, não achismo.</div>
         <div class="tools">Shopee Ads · Afiliado</div>
       </div>
     </div>
   </section>
 
-  <section class="slide" data-phase="Pilar 03 · Atração">
-    <div class="eyebrow">A conta que te dá o controle</div>
-    <h2 class="md" style="margin-bottom:1vh;max-width:42ch">Se eu sei quanto me custa trazer um cliente, eu sei exatamente quanto investir.</h2>
-    <div class="nums">
-      <div class="nb"><div class="lab">Custo por cliente</div><div class="v">R$ 3</div></div>
-      <div class="op">×</div>
-      <div class="nb"><div class="lab">Quero vender</div><div class="v">1.000 pedidos</div></div>
-      <div class="op">=</div>
-      <div class="nb res"><div class="lab">Preciso investir</div><div class="v">R$ 3.000</div></div>
-    </div>
-    <p class="body" style="max-width:78ch">Deixa de ser achismo e vira conta. E o número tem que ser <b>a média da SUA conta</b>, não a média do mercado. O mercado não paga o seu boleto.</p>
-  </section>
+  
 
   <section class="slide" data-phase="Pilar 03 · Atração">
     <div class="glow p"></div>
@@ -446,7 +442,7 @@
     <div class="cover-inner">
       <div class="kicker">Quarto pilar</div>
       <div class="name">Conversão</div>
-      <div class="bridge">Trouxe o cliente certo pra loja certa. <b>Agora eu penso em venda</b>, mas não só a primeira. Aqui eu penso em quanto vou vender, lucrar e construir marca em cima de cada cliente.</div>
+      <div class="bridge">Você trouxe o cliente. <b>Mas o que você está fazendo pra ele virar fã da sua marca?</b> Como você está tratando esse cliente depois da primeira venda? É disso que trata a Conversão.</div>
     </div>
   </section>
 
@@ -520,7 +516,7 @@
   </section>
 
   <section class="slide" data-phase="Pilar 04 · Conversão">
-    <div class="eyebrow">Converter não termina na venda, vira marca</div>
+    <div class="eyebrow">A venda de hoje planta a próxima</div>
     <div class="rows">
       <div class="row"><span class="rk">Avaliação</span><span class="rd">Cliente satisfeito avalia, e a avaliação convence o próximo por você.</span></div>
       <div class="row"><span class="rk">Prova social</span><span class="rd">Gente real falando bem gera confiança em quem ainda não comprou.</span></div>
@@ -543,11 +539,26 @@
   </section>
 
   <section class="slide" data-phase="Fechamento">
-    <div class="glow o"></div><div class="glow p"></div>
+    <div class="glow o"></div>
     <div class="eyebrow">Trate sua loja como uma empresa</div>
-    <h2 class="xl">Pare de vender<br>no <span class="o">escuro.</span></h2>
-    <p class="body ink" style="margin-top:3vh;max-width:52ch">Construa a base, na ordem, e a venda vem como consequência. Não é sorte, é sistema.</p>
-    <div class="brandline"><span class="dot"></span> Karina Leite · Efeito Vendas</div>
+    <h2 class="xl" style="max-width:22ch">Pare de vender<br>no <span class="o">escuro.</span></h2>
+    <p class="body ink" style="margin-top:3vh;max-width:54ch">Construa a base, na ordem, e a venda vem como consequência. Não é sorte, é sistema.</p>
+  </section>
+
+  <section class="slide" data-phase="Fechamento">
+    <div class="glow o"></div><div class="glow p"></div>
+    <div class="cta-wrap">
+      <div class="cta-left">
+        <div class="eyebrow">Vamos continuar juntos</div>
+        <h2 class="lg" style="max-width:16ch"><span class="o">Karina Leite</span></h2>
+        <p class="body ink" style="margin-top:2.4vh;max-width:40ch">Me segue no Instagram pra continuar aprendendo a vender com sistema na Shopee.</p>
+        <div class="cta-handle">@ SEU @ AQUI</div>
+      </div>
+      <div class="cta-qr">
+        <div class="qr-box">QR CODE<br>DO INSTAGRAM</div>
+        <div class="qr-cap">Aponte a câmera</div>
+      </div>
+    </div>
   </section>
 
 </div>
