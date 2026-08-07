@@ -11,7 +11,7 @@
   :root{
     --bg:#07080a; --bg2:#0e0e15;
     --orange:#ff4d1c; --orange-soft:#ff7a52; --orange-pale:#ffb59e;
-    --purple:#7B2FFF;
+    --purple:#7B2FFF; --green:#3ddc84;
     --ink:#f6f6f8; --muted:#9a9aa6; --muted2:#63636f;
     --line:rgba(255,255,255,.08);
     --card:#12121b;
@@ -19,113 +19,85 @@
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{height:100%;background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;overflow:hidden}
   .deck{position:fixed;inset:0}
-
-  .slide{
-    position:absolute;inset:0;display:none;flex-direction:column;
-    padding:8vh 7vw 10vh;opacity:0;transition:opacity .3s ease;
-  }
+  .slide{position:absolute;inset:0;display:none;flex-direction:column;padding:8vh 7vw 10vh;opacity:0;transition:opacity .3s ease}
   .slide.active{display:flex;opacity:1;animation:fade .5s cubic-bezier(.2,.75,.2,1)}
   @keyframes fade{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
   .slide.mid{justify-content:center}
   .slide.spread{justify-content:space-between}
-
-  /* ---------- type ---------- */
   .eyebrow{font-family:'Space Mono',monospace;font-size:clamp(.7rem,1vw,1rem);letter-spacing:.3em;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:14px;margin-bottom:3vh}
   .eyebrow::before{content:"";width:42px;height:2px;background:var(--orange)}
   .eyebrow.mut{color:var(--muted)} .eyebrow.mut::before{background:var(--muted)}
-
-  .xl{font-family:'Bebas Neue',sans-serif;line-height:.9;letter-spacing:.005em;font-size:clamp(3.4rem,9vw,10rem);text-transform:uppercase}
-  .lg{font-family:'Bebas Neue',sans-serif;line-height:.95;letter-spacing:.01em;font-size:clamp(2.8rem,6vw,6.2rem);text-transform:uppercase}
-  .md{font-family:'Bebas Neue',sans-serif;line-height:1;letter-spacing:.01em;font-size:clamp(2rem,3.8vw,3.6rem);text-transform:uppercase}
-  .body{font-size:clamp(1.05rem,1.6vw,1.7rem);color:var(--muted);font-weight:300;line-height:1.5;max-width:56ch}
-  .body.ink{color:var(--ink)} .body.tight{max-width:44ch}
+  .xl{font-family:'Bebas Neue',sans-serif;line-height:.9;letter-spacing:.005em;font-size:clamp(3.4rem,8.4vw,9rem);text-transform:uppercase}
+  .lg{font-family:'Bebas Neue',sans-serif;line-height:.95;letter-spacing:.01em;font-size:clamp(2.8rem,5.6vw,5.8rem);text-transform:uppercase}
+  .md{font-family:'Bebas Neue',sans-serif;line-height:1;letter-spacing:.01em;font-size:clamp(2rem,3.6vw,3.4rem);text-transform:uppercase}
+  .body{font-size:clamp(1.05rem,1.55vw,1.65rem);color:var(--muted);font-weight:300;line-height:1.5;max-width:58ch}
+  .body.ink{color:var(--ink)}
   .o{color:var(--orange)} .p{color:var(--purple)}
   b,strong{font-weight:700;color:var(--ink)}
-
-  /* ---------- pillar cover ---------- */
-  .cover{justify-content:center;position:relative;overflow:hidden}
-  .cover .ghostnum{
-    position:absolute;right:2vw;top:50%;transform:translateY(-50%);
-    font-family:'Bebas Neue',sans-serif;font-size:52vh;line-height:.7;
-    color:transparent;-webkit-text-stroke:2px rgba(255,77,28,.14);z-index:0;pointer-events:none;
-  }
-  .cover .kicker{font-family:'Space Mono',monospace;font-size:clamp(.75rem,1.1vw,1.05rem);letter-spacing:.34em;text-transform:uppercase;color:var(--orange);margin-bottom:2vh;position:relative;z-index:2}
-  .cover .name{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,17vw,17rem);line-height:.82;text-transform:uppercase;position:relative;z-index:2;letter-spacing:.005em}
-  .cover .bridge{position:relative;z-index:2;margin-top:4vh;max-width:52ch;font-size:clamp(1.05rem,1.7vw,1.75rem);font-weight:300;color:var(--muted);line-height:1.5;border-left:3px solid var(--orange);padding-left:26px}
+  .cover{position:relative;overflow:hidden}
+  .slide.cover .cover-inner{position:absolute;top:50%;left:7vw;right:7vw;transform:translateY(-50%);z-index:2;display:flex;flex-direction:column}
+  .cover .ghostnum{position:absolute;right:-1vw;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:min(46vh,40vw);line-height:.7;color:transparent;-webkit-text-stroke:2px rgba(255,77,28,.16);z-index:1;pointer-events:none}
+  .cover .kicker{font-family:'Space Mono',monospace;font-size:clamp(.75rem,1.1vw,1.05rem);letter-spacing:.34em;text-transform:uppercase;color:var(--orange);margin-bottom:2vh}
+  .cover .name{font-family:'Bebas Neue',sans-serif;font-size:clamp(4.5rem,13vw,13rem);line-height:.86;text-transform:uppercase;letter-spacing:.005em}
+  .cover .bridge{margin-top:4vh;max-width:56ch;font-size:clamp(1.05rem,1.65vw,1.7rem);font-weight:300;color:var(--muted);line-height:1.5;border-left:3px solid var(--orange);padding-left:26px}
   .cover .bridge b{color:var(--ink);font-weight:600}
-  .cover .def{position:relative;z-index:2;margin-top:2.4vh;font-family:'Space Mono',monospace;font-size:clamp(.8rem,1.1vw,1.05rem);letter-spacing:.12em;color:var(--orange);text-transform:uppercase}
-
-  /* ---------- intro 4 pillars reveal ---------- */
   .four{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4vw;flex:1;align-content:center}
   .four .pil{border-top:3px solid var(--orange);padding-top:2.4vh;display:flex;flex-direction:column;gap:1.4vh}
   .four .pil .n{font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.2em;color:var(--muted2)}
-  .four .pil .t{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,4.6vw,4.4rem);line-height:.9;letter-spacing:.02em}
-  .four .pil .s{font-size:clamp(.9rem,1.15vw,1.18rem);color:var(--muted);font-weight:300;line-height:1.4}
-  .four .pil:nth-child(1) .t,.four .pil:nth-child(2) .t,.four .pil:nth-child(3) .t,.four .pil:nth-child(4) .t{color:var(--ink)}
-  .four .pil .t .hl{color:var(--orange)}
-
-  /* ---------- authority metrics ---------- */
-  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6vw;margin-top:auto}
-  .metric{border-top:2px solid var(--line);padding-top:2vh}
-  .metric .mv{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.6rem,5.4vw,5rem);color:var(--orange);line-height:.85}
-  .metric .ml{font-size:clamp(.85rem,1.1vw,1.12rem);color:var(--muted);font-weight:300;margin-top:1.2vh;line-height:1.3}
-
-  /* ---------- teaching rows ---------- */
-  .rows{display:flex;flex-direction:column;flex:1;justify-content:center;max-width:78ch;margin-top:2vh}
-  .row{display:grid;grid-template-columns:minmax(220px,28%) 1fr;gap:40px;align-items:baseline;padding:2.4vh 0;border-bottom:1px solid var(--line)}
+  .four .pil .t{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4.4vw,4.2rem);line-height:.9;letter-spacing:.02em;color:var(--ink)}
+  .four .pil .s{font-size:clamp(.9rem,1.1vw,1.15rem);color:var(--muted);font-weight:300;line-height:1.4}
+  .rows{display:flex;flex-direction:column;flex:1;justify-content:center;max-width:80ch;margin-top:2vh}
+  .rows.tight{flex:none}
+  .row{display:grid;grid-template-columns:minmax(230px,30%) 1fr;gap:40px;align-items:baseline;padding:2.3vh 0;border-bottom:1px solid var(--line)}
   .row:first-child{border-top:1px solid var(--line)}
-  .row .rk{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3vw,2.8rem);color:var(--orange);letter-spacing:.02em;line-height:.95}
-  .row .rd{font-size:clamp(1rem,1.45vw,1.42rem);color:var(--muted);font-weight:300;line-height:1.45}
+  .row .rk{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.7rem,2.9vw,2.7rem);color:var(--orange);letter-spacing:.02em;line-height:.95}
+  .row .rd{font-size:clamp(1rem,1.4vw,1.4rem);color:var(--muted);font-weight:300;line-height:1.45}
   .row .rd b{color:var(--ink);font-weight:600}
-
-  /* ---------- concept cards ---------- */
   .grid{display:grid;gap:1.5vw;margin-top:auto;margin-bottom:auto}
   .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:3vh 1.6vw;display:flex;flex-direction:column;gap:1.2vh}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:2.8vh 1.6vw;display:flex;flex-direction:column;gap:1vh}
   .card .cn{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.2em;color:var(--muted2);text-transform:uppercase}
-  .card .ct{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,2.6vw,2.4rem);letter-spacing:.02em;line-height:1;color:var(--orange)}
-  .card .cd{font-size:clamp(.9rem,1.15vw,1.18rem);color:var(--muted);font-weight:300;line-height:1.45}
+  .card .ct{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,2.4vw,2.2rem);letter-spacing:.02em;line-height:1;color:var(--orange)}
+  .card .cd{font-size:clamp(.88rem,1.1vw,1.14rem);color:var(--muted);font-weight:300;line-height:1.42}
   .card.dark .ct{color:var(--ink)}
-  .card.hl{background:linear-gradient(155deg,#1d0e07,#2a1109);border-color:rgba(255,77,28,.4)}
-
-  /* ---------- price vs value ---------- */
   .split{display:grid;grid-template-columns:1fr 1px 1fr;flex:1;align-items:stretch;margin:2vh 0;border:1px solid var(--line);border-radius:18px;overflow:hidden}
-  .split .col{padding:0 3vw;display:flex;flex-direction:column;justify-content:center;gap:1.6vh}
+  .split .col{padding:0 3vw;display:flex;flex-direction:column;justify-content:center;gap:1.4vh}
   .split .lab{font-family:'Space Mono',monospace;letter-spacing:.28em;text-transform:uppercase;font-size:clamp(.72rem,1vw,.98rem);color:var(--muted)}
-  .split .big{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,5vw,4.6rem);line-height:.95}
-  .split p{color:var(--muted);font-weight:300;font-size:clamp(.92rem,1.25vw,1.28rem);line-height:1.45}
+  .split .big{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4.4vw,4rem);line-height:.95}
+  .split p{color:var(--muted);font-weight:300;font-size:clamp(.92rem,1.2vw,1.24rem);line-height:1.45}
+  .split p b{color:var(--ink)}
   .split .vs{background:var(--line)}
   .split .left{background:var(--bg2)} .split .left .big{color:var(--ink)}
   .split .right{background:linear-gradient(160deg,#170b06,#20100a)} .split .right .big{color:var(--orange)}
-
-  /* ---------- two-col tempo/dinheiro ---------- */
   .duo2{display:grid;grid-template-columns:1fr 1fr;gap:1.6vw;flex:1;align-content:center}
-  .duo2 .box{border:1px solid var(--line);border-radius:16px;padding:4vh 2.4vw;background:var(--bg2);display:flex;flex-direction:column;gap:1.6vh}
+  .duo2 .box{border:1px solid var(--line);border-radius:16px;padding:3.4vh 2.2vw;background:var(--bg2);display:flex;flex-direction:column;gap:1.4vh}
+  .duo2 .box.money{background:linear-gradient(160deg,#160b06,#20100a);border-color:rgba(255,77,28,.35)}
   .duo2 .box .tag{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-  .duo2 .box .h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,4.6vw,4rem);line-height:.9;color:var(--orange)}
-  .duo2 .box .d{font-size:clamp(.95rem,1.25vw,1.28rem);color:var(--muted);font-weight:300;line-height:1.45}
-  .duo2 .box .tools{font-size:clamp(.85rem,1.1vw,1.1rem);color:var(--muted2);font-weight:400;margin-top:auto;padding-top:1.6vh;border-top:1px solid var(--line)}
-
-  /* ---------- chips ---------- */
+  .duo2 .box .h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4.2vw,3.6rem);line-height:.9;color:var(--orange)}
+  .duo2 .box .d{font-size:clamp(.92rem,1.2vw,1.22rem);color:var(--muted);font-weight:300;line-height:1.45}
+  .duo2 .box .d b{color:var(--ink)}
+  .duo2 .box .tools{font-size:clamp(.82rem,1.05vw,1.05rem);color:var(--muted2);font-weight:400;margin-top:auto;padding-top:1.4vh;border-top:1px solid var(--line)}
   .chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:3vh}
-  .chip{border:1px solid var(--line);border-radius:999px;padding:1.1vh 1.5vw;font-size:clamp(.92rem,1.35vw,1.32rem);font-weight:500;background:var(--bg2)}
+  .chip{border:1px solid var(--line);border-radius:999px;padding:1.1vh 1.5vw;font-size:clamp(.92rem,1.3vw,1.3rem);font-weight:500;background:var(--bg2)}
   .chip.orange{border-color:var(--orange);color:var(--orange)}
-  .chip.ghost{color:var(--muted2);border-style:dashed}
-
-  /* ---------- example calc ---------- */
-  .calc{display:flex;align-items:stretch;gap:2vw;flex:1;align-items:center}
-  .calc .step{flex:1;background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:4vh 2vw;text-align:center}
-  .calc .step .lab{font-family:'Space Mono',monospace;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:2vh}
-  .calc .step .v{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,4.6vw,4.2rem);line-height:.9}
-  .calc .step .v.cost{color:var(--orange)} .calc .step .v.gain{color:#3ddc84}
-  .calc .step .sub{font-size:clamp(.85rem,1.1vw,1.1rem);color:var(--muted);font-weight:300;margin-top:1.4vh;line-height:1.35}
-  .calc .arrow{display:flex;align-items:center;color:var(--muted2);font-size:2rem}
-
-  /* ---------- pyramid + funnel ---------- */
+  .calc{display:flex;gap:1.6vw;flex:1;align-items:center}
+  .calc .step{flex:1;background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:3.6vh 1.6vw;text-align:center}
+  .calc .step .lab{font-family:'Space Mono',monospace;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1.8vh;line-height:1.3}
+  .calc .step .v{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4.2vw,3.8rem);line-height:.9}
+  .calc .step .v.cost{color:var(--orange)} .calc .step .v.gain{color:var(--green)}
+  .calc .step .sub{font-size:clamp(.82rem,1.05vw,1.06rem);color:var(--muted);font-weight:300;margin-top:1.2vh;line-height:1.35}
+  .calc .arrow{display:flex;align-items:center;color:var(--muted2);font-size:1.8rem}
+  .nums{display:flex;gap:1.6vw;flex:1;align-items:center}
+  .nums .nb{flex:1;border:1px solid var(--line);border-radius:16px;padding:3.4vh 1.6vw;background:var(--bg2);text-align:center}
+  .nums .nb .lab{font-family:'Space Mono',monospace;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1.6vh}
+  .nums .nb .v{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,3.8vw,3.4rem);line-height:.9;color:var(--orange)}
+  .nums .op{display:flex;align-items:center;font-family:'Bebas Neue';font-size:2rem;color:var(--muted2)}
+  .nums .nb.res{background:linear-gradient(160deg,#160b06,#20100a);border-color:rgba(255,77,28,.4)}
+  .nums .nb.res .v{color:#fff}
   .duo{display:grid;grid-template-columns:1fr 1fr;gap:5vw;flex:1;align-items:center;margin-top:1vh}
   .vlabel{font-family:'Space Mono',monospace;letter-spacing:.22em;text-transform:uppercase;font-size:clamp(.68rem,.95vw,.92rem);color:var(--muted);text-align:center;margin-bottom:2.4vh}
   .pyr,.fun{display:flex;flex-direction:column;align-items:center;gap:9px;width:100%}
-  .tier,.fstep{display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;letter-spacing:.05em;border-radius:8px;text-transform:uppercase;font-size:clamp(1rem,1.9vw,1.8rem);padding:2vh 1vw;text-align:center;line-height:1}
+  .tier,.fstep{display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;letter-spacing:.05em;border-radius:8px;text-transform:uppercase;font-size:clamp(1rem,1.8vw,1.7rem);padding:1.9vh 1vw;text-align:center;line-height:1}
   .tier small{font-family:'Outfit';font-weight:400;text-transform:none;letter-spacing:0;font-size:.55em;opacity:.85;margin-left:.5em}
   .t1{width:40%;background:var(--orange);color:#fff}
   .t2{width:60%;background:var(--orange-soft);color:#fff}
@@ -135,31 +107,23 @@
   .fn2{width:76%;background:var(--orange-pale);color:#3a1206}
   .fn3{width:54%;background:var(--orange-soft);color:#fff}
   .fn4{width:34%;background:var(--orange);color:#fff}
-  .vsub{text-align:center;color:var(--muted2);font-weight:300;font-size:clamp(.82rem,1.05vw,1.08rem);margin-top:2.4vh;line-height:1.4}
-
-  /* ---------- recap ---------- */
-  .recap{display:flex;flex-direction:column;flex:1;justify-content:center;gap:0;max-width:90ch}
-  .recap .rr{display:grid;grid-template-columns:minmax(230px,30%) 1fr;gap:34px;align-items:baseline;padding:3vh 0;border-bottom:1px solid var(--line)}
+  .vsub{text-align:center;color:var(--muted2);font-weight:300;font-size:clamp(.82rem,1.05vw,1.06rem);margin-top:2.4vh;line-height:1.4}
+  .recap{display:flex;flex-direction:column;flex:1;justify-content:center;max-width:92ch}
+  .recap .rr{display:grid;grid-template-columns:minmax(240px,30%) 1fr;gap:34px;align-items:baseline;padding:2.8vh 0;border-bottom:1px solid var(--line)}
   .recap .rr:first-child{border-top:1px solid var(--line)}
-  .recap .rr .rn{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4.4vw,4rem);color:var(--orange);line-height:.9;letter-spacing:.02em}
-  .recap .rr .rt{font-size:clamp(1.05rem,1.6vw,1.7rem);color:var(--ink);font-weight:300;line-height:1.35}
-
-  /* ---------- statement ---------- */
+  .recap .rr .rn{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.1rem,4.2vw,3.8rem);color:var(--orange);line-height:.9;letter-spacing:.02em}
+  .recap .rr .rt{font-size:clamp(1.05rem,1.55vw,1.65rem);color:var(--ink);font-weight:300;line-height:1.35}
   .quote-mark{font-family:'Bebas Neue',sans-serif;color:var(--orange);font-size:clamp(4rem,11vw,11rem);line-height:.35;opacity:.2}
-
-  /* ---------- title / cta ---------- */
-  .brandline{font-family:'Space Mono',monospace;letter-spacing:.26em;text-transform:uppercase;font-size:clamp(.72rem,1.1vw,1rem);color:var(--muted);margin-top:auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .task{border:2px dashed rgba(255,77,28,.5);border-radius:18px;padding:4vh 3vw;background:linear-gradient(160deg,#140a06,#1b0d07);margin-top:2vh}
+  .task .tnum{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;color:var(--orange);margin-bottom:2vh}
+  .brandline{font-family:'Space Mono',monospace;letter-spacing:.26em;text-transform:uppercase;font-size:clamp(.72rem,1.1vw,1rem);color:var(--muted);margin-top:5vh;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
   .brandline b{color:var(--ink);font-weight:700}
   .brandline .dot{width:6px;height:6px;border-radius:50%;background:var(--orange)}
-  .note{color:var(--muted2);font-size:.85em}
-
-  /* ---------- glows ---------- */
   .glow{position:absolute;border-radius:50%;filter:blur(140px);opacity:.14;pointer-events:none;z-index:0}
   .glow.o{background:var(--orange);width:48vw;height:48vw;top:-18vw;right:-14vw}
   .glow.p{background:var(--purple);width:42vw;height:42vw;bottom:-20vw;left:-16vw}
   .slide>*{position:relative;z-index:1}
-
-  /* ---------- chrome ---------- */
+  .cover>.glow{z-index:0}
   .chrome{position:fixed;bottom:3.2vh;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:0 7vw;z-index:50;pointer-events:none}
   .counter{font-family:'Space Mono',monospace;font-size:.82rem;color:var(--muted2);letter-spacing:.15em}
   .counter b{color:var(--orange)}
@@ -169,16 +133,14 @@
   .navbtns button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:.2s}
   .navbtns button:hover{border-color:var(--orange);color:var(--orange)}
   .hint{position:fixed;top:3vh;right:7vw;font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted2);letter-spacing:.16em;z-index:50;opacity:.5}
-
   @media (max-width:900px){
     .slide{padding:10vh 7vw 12vh}
     .four{grid-template-columns:repeat(2,1fr);gap:3vh 1.5vw}
-    .metrics{grid-template-columns:repeat(2,1fr);gap:3vh 1.5vw}
-    .g4,.g3{grid-template-columns:1fr} .g2,.duo2,.duo{grid-template-columns:1fr;gap:2.4vh}
+    .g4,.g3{grid-template-columns:1fr} .g2,.duo2,.duo,.calc,.nums{grid-template-columns:1fr;gap:2.4vh}
+    .calc,.nums{flex-direction:column} .calc .arrow,.nums .op{transform:rotate(90deg)}
     .split{grid-template-columns:1fr;border:none} .split .col{border:1px solid var(--line);border-radius:14px;padding:3.5vh 6vw} .split .vs{display:none}
-    .calc{flex-direction:column} .calc .arrow{transform:rotate(90deg)}
     .row,.recap .rr{grid-template-columns:1fr;gap:8px}
-    .cover .ghostnum{font-size:36vh;opacity:.6}
+    .cover .ghostnum{opacity:.5}
     .chrome,.navbtns{padding:0 7vw} .navbtns{right:7vw}
   }
 </style>
@@ -188,9 +150,6 @@
 <div class="hint">← → navegar · F tela cheia</div>
 <div class="deck" id="deck">
 
-  <!-- ================= ABERTURA ================= -->
-
-  <!-- 1 CAPA -->
   <section class="slide mid" data-phase="Abertura">
     <div class="glow o"></div><div class="glow p"></div>
     <div class="eyebrow">Shopee Trends 2026 · Karina Leite</div>
@@ -198,122 +157,114 @@
     <p class="body" style="margin-top:4vh">O método pra estruturar uma loja que vende bem na Shopee — do produto certo até o cliente que volta.</p>
   </section>
 
-  <!-- 2 QUEM SOU EU -->
-  <section class="slide" data-phase="Abertura">
-    <div class="glow o"></div>
-    <div class="eyebrow">Prazer — quem tá falando com você</div>
-    <h2 class="lg" style="max-width:20ch"><span class="o">Karina Leite</span><br>Efeito Vendas</h2>
-    <p class="body" style="margin-top:3vh;max-width:58ch">Tudo que eu vou te mostrar aqui é o que eu aplico todo dia, na prática, com loja de verdade.</p>
-    <div class="metrics">
-      <div class="metric"><div class="mv">+200mi</div><div class="ml">em vendas geradas nas lojas que acompanho</div></div>
-      <div class="metric"><div class="mv">+7 mil</div><div class="ml">alunos formados no método</div></div>
-      <div class="metric"><div class="mv">Oficial</div><div class="ml">Parceira Certificada &amp; Influenciadora Shopee</div></div>
-      <div class="metric"><div class="mv">+50 mil</div><div class="ml">vendedores acompanham o conteúdo</div></div>
-    </div>
-    <p class="note" style="margin-top:2vh">↑ ajuste os números do jeito que você usa</p>
-  </section>
-
-  <!-- 3 A PREMISSA -->
   <section class="slide mid" data-phase="Abertura">
     <div class="glow p"></div>
     <div class="eyebrow mut">A verdade que quase ninguém quer ouvir</div>
     <h2 class="xl" style="max-width:20ch">Vender bem não é sorte.<br>É <span class="o">estrutura.</span></h2>
-    <p class="body ink" style="margin-top:4vh;max-width:50ch">A maioria tenta vender empurrando tráfego numa loja que ainda não está pronta pra vender. Coloca dinheiro na frente do que deveria vir primeiro — e depois não entende por que não converte.</p>
+    <p class="body ink" style="margin-top:4vh;max-width:54ch">A maioria quer resolver tudo gerando tráfego — antes de ter o produto certo, antes da loja estar pronta pra vender. E aí investe pra atrair gente pra uma casa que ainda está desarrumada.</p>
   </section>
 
-  <!-- 4 OS 4 PILARES (reveal em destaque) -->
+  <section class="slide mid" data-phase="Abertura">
+    <div class="glow o"></div>
+    <div class="eyebrow">O jeito certo de enxergar sua loja</div>
+    <h2 class="lg" style="max-width:24ch">Trate a sua loja<br>como uma <span class="o">empresa.</span></h2>
+    <p class="body ink" style="margin-top:3vh;max-width:60ch">Empresa não é pegar o produto, cadastrar e despachar. Todo negócio se constrói sobre pilares — e você tem que cuidar de todos eles. A diferença é que aqui a gente faz isso <b>dentro da Shopee, com as ferramentas da Shopee.</b></p>
+  </section>
+
   <section class="slide spread" data-phase="Abertura">
     <div>
       <div class="eyebrow">O sistema tem uma ordem — e a ordem é o método</div>
       <h2 class="lg">Os 4 Pilares da Venda</h2>
     </div>
     <div class="four">
-      <div class="pil"><div class="n">01</div><div class="t"><span class="hl">Conexão</span></div><div class="s">O que eu vendo e pra quem.</div></div>
-      <div class="pil"><div class="n">02</div><div class="t"><span class="hl">Estrutura</span></div><div class="s">Como apresento o que vendo.</div></div>
-      <div class="pil"><div class="n">03</div><div class="t"><span class="hl">Atração</span></div><div class="s">Como trago visitantes.</div></div>
-      <div class="pil"><div class="n">04</div><div class="t"><span class="hl">Conversão</span></div><div class="s">Quanto vendo, lucro e construo marca.</div></div>
+      <div class="pil"><div class="n">01</div><div class="t">Conexão</div><div class="s">O que eu vendo e pra quem.</div></div>
+      <div class="pil"><div class="n">02</div><div class="t">Estrutura</div><div class="s">Como apresento o que vendo.</div></div>
+      <div class="pil"><div class="n">03</div><div class="t">Atração</div><div class="s">Como trago visitantes.</div></div>
+      <div class="pil"><div class="n">04</div><div class="t">Conversão</div><div class="s">Quanto vendo, lucro e construo marca.</div></div>
     </div>
-    <p class="body" style="max-width:64ch">Um pilar só faz sentido depois do anterior estar de pé. Você não pula etapa — você constrói.</p>
+    <p class="body" style="max-width:66ch">Um pilar só faz sentido depois do anterior estar de pé. Você não pula etapa — você constrói.</p>
   </section>
 
-  <!-- ================= PILAR 1 · CONEXÃO ================= -->
-
-  <!-- 5 CAPA P1 -->
   <section class="slide cover" data-phase="Pilar 01 · Conexão">
     <div class="glow o"></div>
     <div class="ghostnum">01</div>
-    <div class="kicker">Primeiro pilar</div>
-    <div class="name">Conexão</div>
-    <div class="bridge">Antes de qualquer coisa, eu me conecto com o produto certo e com quem vai comprar dele. <b>O que eu vendo — e pra quem eu vendo.</b></div>
+    <div class="cover-inner">
+      <div class="kicker">Primeiro pilar</div>
+      <div class="name">Conexão</div>
+      <div class="bridge"><b>O que eu vendo — e pra quem eu vendo.</b> Antes de tudo, eu me conecto com o produto certo e com quem vai comprar dele.</div>
+    </div>
   </section>
 
-  <!-- 6 PROJETO DE PRODUTO -->
   <section class="slide" data-phase="Pilar 01 · Conexão">
     <div class="eyebrow">Projeto de produto</div>
     <h2 class="lg" style="max-width:24ch">Todo produto entra na loja<br>com uma <span class="o">intenção.</span></h2>
-    <p class="body" style="margin-top:3vh">Antes de subir qualquer produto, responda: <b>por que estou vendendo isso</b> e <b>qual a função dele no meu negócio?</b> Cadastrar custa tempo, foto, vídeo, investimento em anúncio e acompanhamento todo dia. Sem intenção clara, você gasta tudo isso à toa.</p>
+    <p class="body" style="margin-top:3vh">Antes de subir qualquer produto, responda: <b>por que estou vendendo isso</b> e <b>qual a função dele no meu negócio?</b> Cadastrar custa tempo, foto, vídeo, investimento e acompanhamento todo dia. Sem intenção clara, você gasta tudo isso à toa.</p>
     <div class="chips">
       <span class="chip">Por que esse produto?</span>
-      <span class="chip">Qual o papel dele na loja?</span>
+      <span class="chip">Qual a função dele na loja?</span>
       <span class="chip">Vale o esforço de cadastrar?</span>
     </div>
   </section>
 
-  <!-- 7 OS 4 PAPÉIS -->
   <section class="slide" data-phase="Pilar 01 · Conexão">
-    <div class="eyebrow">Todo produto joga uma posição</div>
+    <div class="eyebrow">Cada produto tem uma função dentro da loja</div>
+    <h2 class="md" style="margin-bottom:1.4vh;max-width:34ch">Você consegue responder qual é o seu produto de cada tipo?</h2>
     <div class="grid g4">
-      <div class="card"><div class="cn">Papel 01</div><div class="ct">Curva A</div><div class="cd">Seu ganha-pão. Traz o retorno principal — investimento pesado e foco em escala.</div></div>
-      <div class="card"><div class="cn">Papel 02</div><div class="ct">Margem</div><div class="cd">Fortalece o caixa. Margem boa, ajuda a pagar as contas do mês.</div></div>
-      <div class="card"><div class="cn">Papel 03</div><div class="ct">Porta de entrada</div><div class="cd">Ticket baixo pra atrair cliente novo — e depois vender o resto pra ele.</div></div>
-      <div class="card"><div class="cn">Papel 04</div><div class="ct">Liquidação</div><div class="cd">Gira estoque parado. Libera espaço e capital, sem gastar com anúncio.</div></div>
+      <div class="card"><div class="cn">Curva A</div><div class="ct">O carro-chefe</div><div class="cd">O que mais vende e puxa o seu faturamento. Nele você investe pesado e escala.</div></div>
+      <div class="card"><div class="cn">Margem</div><div class="ct">O que mais lucra</div><div class="cd">Vende menos, mas cada venda deixa <b>mais lucro</b> no bolso.</div></div>
+      <div class="card"><div class="cn">Porta de entrada</div><div class="ct">O que atrai cliente</div><div class="cd">Preço convidativo pra trazer cliente novo — pra depois vender o resto.</div></div>
+      <div class="card"><div class="cn">Liquidação</div><div class="ct">O que gira estoque</div><div class="cd">Escoa o que está parado, libera espaço e capital.</div></div>
     </div>
   </section>
 
-  <!-- 8 O PRODUTO CERTO (recado) -->
   <section class="slide" data-phase="Pilar 01 · Conexão">
     <div class="glow o"></div>
-    <div class="eyebrow">Um recado sobre escolher o produto</div>
-    <h2 class="lg" style="max-width:26ch">Entre onde você <span class="o">sabe</span><br>que vai ter margem.</h2>
-    <p class="body" style="margin-top:3vh;max-width:58ch">Não entre num produto só porque parece que vende. Escolha um mercado e um produto onde você tem margem pensando <b>no longo prazo</b> — não só na primeira venda.</p>
-    <div class="rows" style="flex:none;margin-top:3vh">
+    <div class="eyebrow">Projeto de produto é escolher com margem</div>
+    <h2 class="lg" style="max-width:28ch">Quando eu escolho o produto,<br>eu já escolho um que <span class="o">tem margem.</span></h2>
+    <p class="body" style="margin-top:3vh;max-width:60ch">Se eu entendi o que quero daquele produto e ele tem margem, aí sim eu invisto na construção dele — pensando no <b>longo prazo</b>, não só na primeira venda.</p>
+    <div class="rows tight" style="margin-top:3vh">
       <div class="row"><span class="rk">Fornecedor</span><span class="rd">Quem te abastece, com que qualidade e a que custo.</span></div>
       <div class="row"><span class="rk">Preço de compra</span><span class="rd">Compra por um valor que <b>deixa margem</b> pra trabalhar depois.</span></div>
       <div class="row"><span class="rk">Competitividade</span><span class="rd">Seu preço aguenta o mercado sem zerar o seu lucro.</span></div>
     </div>
   </section>
 
-  <!-- 9 PRA QUEM EU VENDO -->
   <section class="slide mid" data-phase="Pilar 01 · Conexão">
     <div class="glow p"></div>
     <div class="eyebrow">Pra quem eu vendo</div>
     <h2 class="xl" style="max-width:18ch">Quem recebe<br>o seu <span class="o">produto?</span></h2>
-    <p class="body ink" style="margin-top:4vh;max-width:52ch">O que essa pessoa precisa? O que ela quer resolver? Característica e benefício do produto só têm força quando falam <b>diretamente</b> com quem vai comprar. É isso que conecta o seu produto a ela.</p>
+    <p class="body ink" style="margin-top:4vh;max-width:54ch">O que essa pessoa precisa? O que ela quer resolver? Característica e benefício do produto só têm força quando falam <b>diretamente</b> com quem vai comprar. É isso que conecta o seu produto a ela.</p>
   </section>
 
-  <!-- 10 PREÇO x VALOR -->
   <section class="slide" data-phase="Pilar 01 · Conexão">
     <div class="eyebrow">A comunicação que conecta produto e cliente</div>
     <div class="split">
-      <div class="col left"><div class="lab">Preço</div><div class="big">O que ele paga</div><p>O custo em dinheiro. Se você só mostra isso, o cliente só compara isso.</p></div>
+      <div class="col left"><div class="lab">Preço</div><div class="big">O que ele paga</div><p>É só o número. Quando você mostra <b>só o preço</b>, o cliente não tem outra coisa pra comparar a não ser preço — e vai pro mais barato.</p></div>
       <div class="vs"></div>
-      <div class="col right"><div class="lab">Valor</div><div class="big">O que ele ganha</div><p>O benefício que ele enxerga. A dor que some, a vida que melhora.</p></div>
+      <div class="col right"><div class="lab">Valor</div><div class="big">O que ele ganha</div><p>É a dor que some, o problema resolvido, a vida mais fácil. Quando ele enxerga <b>valor</b>, o preço deixa de ser o centro.</p></div>
     </div>
-    <p class="body" style="max-width:70ch">Quando você vende só preço, <b>perde pro concorrente</b> e vive baixando o valor pra ganhar mercado. Quando o <span class="o">valor supera o preço</span>, a venda fica fácil — e o preço deixa de ser o centro da conversa.</p>
+    <p class="body" style="max-width:72ch">Vender só preço é entrar na guerra de preço e <b>perder pro concorrente.</b> Vender valor é o que te tira dessa briga.</p>
   </section>
 
-  <!-- ================= PILAR 2 · ESTRUTURA ================= -->
+  <section class="slide" data-phase="Pilar 01 · Conexão">
+    <div class="eyebrow">Sua tarefa pra hoje</div>
+    <div class="task">
+      <div class="tnum">Pega papel e caneta — agora</div>
+      <h2 class="md" style="max-width:40ch">Pegue o seu produto Curva A e liste <span class="o">5 benefícios</span> e <span class="o">5 características</span> que só ele tem.</h2>
+      <p class="body ink" style="margin-top:2.4vh;max-width:64ch">O que ele tem de diferente dos outros — o que faria o cliente comprar de você e não do concorrente. E aí vem a pergunta que abre o próximo pilar: <b>como você mostra isso pro seu cliente?</b> Porque é exatamente isso que separa quem vende por preço de quem vende por valor.</p>
+    </div>
+  </section>
 
-  <!-- 11 CAPA P2 (com transição) -->
   <section class="slide cover" data-phase="Pilar 02 · Estrutura">
     <div class="glow o"></div>
     <div class="ghostnum">02</div>
-    <div class="kicker">Segundo pilar</div>
-    <div class="name">Estrutura</div>
-    <div class="bridge">Já sei o que vendo, pra quem, onde compro e quanto vou precificar. <b>Agora eu penso em como estruturar esse produto dentro da plataforma pra exibir</b> — de um jeito que a pessoa queira comprar de mim.</div>
+    <div class="cover-inner">
+      <div class="kicker">Segundo pilar</div>
+      <div class="name">Estrutura</div>
+      <div class="bridge">Já sei o que vendo, pra quem, onde compro e quanto vou precificar. <b>Agora eu penso em como estruturar esse produto dentro da plataforma pra exibir</b> — de um jeito que a pessoa queira comprar de mim.</div>
+    </div>
   </section>
 
-  <!-- 12 O CLIENTE NÃO PEGA NO PRODUTO -->
   <section class="slide mid" data-phase="Pilar 02 · Estrutura">
     <div class="glow o"></div>
     <div class="eyebrow">A regra número um da venda online</div>
@@ -321,88 +272,100 @@
     <p class="body ink" style="margin-top:4vh;max-width:56ch">Ele não sente o peso, não mede, não toca no material, não conhece as características. Tudo que ele não pode pegar na mão é <b>obrigação</b> aparecer no seu cadastro. Numa venda online, o cadastro é o seu produto.</p>
   </section>
 
-  <!-- 13 OS CAMPOS -->
   <section class="slide" data-phase="Pilar 02 · Estrutura">
     <div class="eyebrow">Cada campo do cadastro tem uma função</div>
     <div class="rows">
       <div class="row"><span class="rk">Foto</span><span class="rd">O <b>máximo de detalhe possível</b> do produto, de todos os ângulos — mostrando o que ele não pode tocar.</span></div>
       <div class="row"><span class="rk">Vídeo</span><span class="rd">O produto em movimento, na vida real. É o mais perto que o cliente chega de ter nas mãos.</span></div>
       <div class="row"><span class="rk">Título</span><span class="rd">Conciso, com palavras que <b>especificam</b> o produto — não palavra aleatória só pra preencher.</span></div>
-      <div class="row"><span class="rk">Descrição</span><span class="rd">Tudo que a foto e o título <b>não mostraram</b>: medida, material, modo de uso, benefício.</span></div>
+      <div class="row"><span class="rk">Descrição</span><span class="rd">Tudo que a foto e o título <b>não mostraram</b>: medida, material, modo de uso, benefício. Aqui entram os 5 benefícios que você listou.</span></div>
     </div>
   </section>
 
-  <!-- 14 O SINAL DO CHAT -->
   <section class="slide mid" data-phase="Pilar 02 · Estrutura">
     <div class="glow p"></div>
     <div class="quote-mark">&ldquo;</div>
-    <h2 class="lg" style="max-width:22ch">Recebe muita dúvida no chat?<br>Seu cadastro está <span class="o">falhando.</span></h2>
+    <h2 class="lg" style="max-width:24ch">Recebe muita dúvida no chat?<br>Seu cadastro está <span class="o">falhando.</span></h2>
     <p class="body ink" style="margin-top:3vh;max-width:58ch">Quem pergunta é a <b>minoria</b>. Pra cada um que manda mensagem, tem vários que ficaram com a mesma dúvida — e saíram sem comprar. Essas vendas você perde em silêncio, sem nem ver que perdeu.</p>
   </section>
 
-  <!-- 15 FERRAMENTAS DA OFERTA (expandida com how-to) -->
   <section class="slide" data-phase="Pilar 02 · Estrutura">
     <div class="eyebrow">Estruturar a oferta também é estrutura</div>
-    <h2 class="md" style="margin-bottom:1vh">Não é guerra de preço — é montar a oferta pra vender mais no mesmo pedido.</h2>
+    <h2 class="md" style="margin-bottom:1vh;max-width:40ch">Não é guerra de preço. É montar a oferta pra vender mais no mesmo pedido.</h2>
     <div class="grid g3">
-      <div class="card dark"><div class="ct o">Oferta relâmpago</div><div class="cd">Tempo curto pra decidir. Cria <b>urgência e escassez</b> — a pessoa compra agora pra não perder.</div></div>
-      <div class="card dark"><div class="ct o">Combo / Cross-sell</div><div class="cd">"Comprou a bota? Leve a meia com desconto." Vende <b>mais itens</b> no mesmo pedido.</div></div>
+      <div class="card dark"><div class="ct o">Oferta relâmpago</div><div class="cd">Tempo curto pra decidir. Cria <b>urgência</b> — a pessoa compra agora pra não perder a condição.</div></div>
+      <div class="card dark"><div class="ct o">Combo · Cross-sell</div><div class="cd">"Comprou a bota? Leve a meia com desconto." Faz o cliente levar <b>mais itens</b> no mesmo pedido.</div></div>
       <div class="card dark"><div class="ct o">Leve mais por menos</div><div class="cd">"Leve 3, ganhe 5% OFF." Aumenta o <b>tamanho da cesta</b> e o seu ticket médio.</div></div>
     </div>
-    <p class="body" style="max-width:70ch">Todas sobem o ticket e <b>diluem o custo fixo</b> do pedido — embalagem, etiqueta, envio — no mesmo cliente. Mais lucro sem gastar mais pra atrair.</p>
+    <p class="body" style="max-width:72ch">Todas sobem o ticket e <b>diluem o custo fixo</b> do pedido — embalagem, etiqueta, envio — no mesmo cliente. Mais lucro sem gastar mais pra atrair.</p>
   </section>
 
-  <!-- 16 FECHO ESTRUTURA -->
   <section class="slide mid" data-phase="Pilar 02 · Estrutura">
     <div class="glow o"></div>
     <div class="quote-mark">&ldquo;</div>
     <h2 class="xl">Casa desarrumada<br><span class="o">não recebe visita.</span></h2>
-    <p class="body ink" style="margin-top:3vh;max-width:52ch">Só faz sentido chamar gente pra dentro depois que a casa está pronta pra receber. E é exatamente aí que entra o próximo pilar.</p>
+    <p class="body ink" style="margin-top:3vh;max-width:52ch">Produto pensado, cadastro pronto pra vender. Só agora eu penso em trazer gente pra dentro — e é aí que entra o próximo pilar.</p>
   </section>
 
-  <!-- ================= PILAR 3 · ATRAÇÃO ================= -->
-
-  <!-- 17 CAPA P3 (transição) -->
   <section class="slide cover" data-phase="Pilar 03 · Atração">
     <div class="glow o"></div>
     <div class="ghostnum">03</div>
-    <div class="kicker">Terceiro pilar</div>
-    <div class="name">Atração</div>
-    <div class="bridge">Já sei o que vendo, pra quem, e como exibir esse produto pras pessoas. <b>Agora sim eu penso em gerar tráfego pra ele</b> — trazer visitante pra loja que já está pronta pra receber.</div>
+    <div class="cover-inner">
+      <div class="kicker">Terceiro pilar</div>
+      <div class="name">Atração</div>
+      <div class="bridge">Já sei o que vendo, pra quem, e como exibir esse produto pras pessoas. <b>Agora sim eu penso em gerar tráfego pra ele</b> — trazer visitante pra loja que já está pronta pra receber.</div>
+    </div>
   </section>
 
-  <!-- 18 AS FERRAMENTAS -->
   <section class="slide" data-phase="Pilar 03 · Atração">
     <div class="eyebrow">As formas de trazer gente pra sua loja</div>
     <div class="grid g3">
-      <div class="card dark"><div class="ct">Shopee Live</div></div>
-      <div class="card dark"><div class="ct">Shopee Vídeo</div></div>
-      <div class="card dark"><div class="ct">Orgânico</div></div>
-      <div class="card dark"><div class="ct">Shopee Ads</div></div>
-      <div class="card dark"><div class="ct">Afiliado</div></div>
-      <div class="card hl"><div class="ct o">Cada uma no seu momento</div><div class="cd">Você não usa todas do mesmo jeito. Cada ferramenta tem uma função — e você escolhe pela função, não pela moda.</div></div>
+      <div class="card dark"><div class="ct">Shopee Live</div><div class="cd">Você ao vivo, vendendo em tempo real e criando conexão na hora.</div></div>
+      <div class="card dark"><div class="ct">Shopee Vídeo</div><div class="cd">Conteúdo curto que mostra o produto e leva a pessoa até a loja.</div></div>
+      <div class="card dark"><div class="ct">Orgânico</div><div class="cd">O tráfego que a Shopee te dá de graça quando seu produto é relevante.</div></div>
+      <div class="card dark"><div class="ct">Shopee Ads</div><div class="cd">Você paga pra aparecer na frente de quem está procurando.</div></div>
+      <div class="card dark"><div class="ct">Afiliado</div><div class="cd">Outras pessoas divulgam seu produto e ganham comissão por venda.</div></div>
+      <div class="card dark"><div class="ct o">Cada uma no seu momento</div><div class="cd">Você escolhe pela função — não pela moda. E usa várias juntas.</div></div>
     </div>
   </section>
 
-  <!-- 19 TEMPO x DINHEIRO (contextualizado) -->
   <section class="slide" data-phase="Pilar 03 · Atração">
     <div class="eyebrow">Cada ferramenta cobra um preço diferente</div>
     <div class="duo2">
-      <div class="box"><div class="tag">Umas cobram</div><div class="h">Tempo</div><div class="d">Live e vídeo pedem a sua presença, a sua produção, o seu trabalho no dia a dia.</div><div class="tools">Shopee Live · Shopee Vídeo · Orgânico</div></div>
-      <div class="box"><div class="tag">Outras cobram</div><div class="h">Dinheiro</div><div class="d">Ads e afiliado pedem investimento — e por isso te dão <b>mais controle</b>: você sabe quanto investe, quanto retorna, qual o seu ROAS. É aqui que os números aparecem.</div><div class="tools">Shopee Ads · Afiliado</div></div>
+      <div class="box">
+        <div class="tag">Umas cobram</div><div class="h">Tempo</div>
+        <div class="d">Live, vídeo e orgânico pedem a sua presença e o seu trabalho. O <b>orgânico</b> é construção de longo prazo: você constrói hoje pra colher amanhã — não dá pra plantar hoje e querer vender no orgânico amanhã.</div>
+        <div class="tools">Shopee Live · Shopee Vídeo · Orgânico</div>
+      </div>
+      <div class="box money">
+        <div class="tag">Outras cobram</div><div class="h">Dinheiro</div>
+        <div class="d">Ads e afiliado pedem investimento — e por isso te dão <b>mais controle</b>. Você sabe quanto investe, quanto retorna, e quanto custa cada cliente. É aqui que os números aparecem.</div>
+        <div class="tools">Shopee Ads · Afiliado</div>
+      </div>
     </div>
-    <p class="body" style="max-width:76ch">Não é escolher uma. Você <b>encaixa as duas</b> no seu dia. E lembra: se o dinheiro está precificado, aquele retorno já era seu — o custo não tirou nada da sua margem.</p>
+    <p class="body" style="max-width:76ch">Não é escolher uma. Você <b>encaixa as duas</b> no seu dia. E se o dinheiro está precificado, aquele retorno já era seu — o custo não tirou nada da margem.</p>
   </section>
 
-  <!-- 20 ELAS SE CONECTAM (jornada cruzada) -->
+  <section class="slide" data-phase="Pilar 03 · Atração">
+    <div class="eyebrow">O controle mora nos números</div>
+    <h2 class="md" style="margin-bottom:1vh;max-width:40ch">Se eu sei quanto custa cada cliente, eu sei quanto preciso investir.</h2>
+    <div class="nums">
+      <div class="nb"><div class="lab">Custo por cliente</div><div class="v">R$ 3</div></div>
+      <div class="op">×</div>
+      <div class="nb"><div class="lab">Quero vender</div><div class="v">1.000 pedidos</div></div>
+      <div class="op">=</div>
+      <div class="nb res"><div class="lab">Preciso investir</div><div class="v">R$ 3.000</div></div>
+    </div>
+    <p class="body" style="max-width:76ch">Deixa de ser achismo e vira conta. E o número tem que ser <b>a média da SUA conta</b> — não a média do mercado. O mercado não paga o seu boleto.</p>
+  </section>
+
   <section class="slide mid" data-phase="Pilar 03 · Atração">
     <div class="glow p"></div>
-    <div class="eyebrow">Elas se conectam — ou agem sozinhas</div>
-    <h2 class="lg" style="max-width:24ch">O cliente nem sempre faz<br>o <span class="o">caminho completo.</span></h2>
-    <p class="body ink" style="margin-top:3vh;max-width:64ch">Às vezes ele vem pelo Ads, assiste um vídeo e compra. Às vezes vê o afiliado divulgando, depois te acha, e só aí compra. Usar cada ferramenta <b>isolada encarece o seu tráfego</b> e come a sua margem. O jogo é fazer todas trabalharem juntas.</p>
+    <div class="eyebrow">Você recebe cliente por várias portas</div>
+    <h2 class="lg" style="max-width:26ch">Use múltiplas fontes pra<br><span class="o">baratear</span> cada cliente novo.</h2>
+    <p class="body ink" style="margin-top:3vh;max-width:66ch">Um cliente pode te achar pelo Ads, outro por um vídeo, outro pela indicação de um afiliado. Quando você usa <b>social commerce</b> e entende como se conectar com o cliente em cada canal, você distribui o esforço e <b>reduz o custo por aquisição</b> — em vez de depender de uma porta só e pagar caro por ela.</p>
   </section>
 
-  <!-- 21 MARKETING ENGLOBA TUDO -->
   <section class="slide" data-phase="Pilar 03 · Atração">
     <div class="eyebrow">Marketing engloba tudo</div>
     <h2 class="lg" style="max-width:24ch">O custo real de uma venda<br>é a <span class="o">soma.</span></h2>
@@ -414,34 +377,33 @@
     <p class="body" style="margin-top:3vh;max-width:64ch">Não é só o Ads. É tudo que você compra e paga dentro das ferramentas. E <b>tudo isso junto</b> tem que caber dentro do valor que você topa pagar pra fazer uma venda.</p>
   </section>
 
-  <!-- 22 A COMPOSIÇÃO -->
   <section class="slide mid" data-phase="Pilar 03 · Atração">
     <div class="glow o"></div>
-    <div class="eyebrow mut">A pergunta que fica na sua cabeça</div>
-    <h2 class="xl" style="max-width:22ch">Quanto cada ferramenta<br>representa das suas <span class="o">vendas?</span></h2>
-    <p class="body ink" style="margin-top:4vh;max-width:52ch">Se você não sabe esse número, está distribuindo dinheiro no escuro — sem saber o que realmente está te trazendo venda.</p>
+    <div class="eyebrow">A pergunta que você deve se fazer</div>
+    <div class="rows tight" style="max-width:78ch">
+      <div class="row"><span class="rk" style="font-size:clamp(1.4rem,2.2vw,2rem)">01</span><span class="rd" style="font-size:clamp(1.05rem,1.5vw,1.5rem);color:var(--ink)">Quanto cada ferramenta representa no seu <b>faturamento?</b></span></div>
+      <div class="row"><span class="rk" style="font-size:clamp(1.4rem,2.2vw,2rem)">02</span><span class="rd" style="font-size:clamp(1.05rem,1.5vw,1.5rem);color:var(--ink)">Quanto você investe em cada uma — de <b>tempo</b> ou de <b>dinheiro?</b></span></div>
+      <div class="row"><span class="rk" style="font-size:clamp(1.4rem,2.2vw,2rem)">03</span><span class="rd" style="font-size:clamp(1.05rem,1.5vw,1.5rem);color:var(--ink)">Esse investimento está te dando o <b>retorno que você espera?</b></span></div>
+    </div>
   </section>
 
-  <!-- ================= PILAR 4 · CONVERSÃO ================= -->
-
-  <!-- 23 CAPA P4 (transição) -->
   <section class="slide cover" data-phase="Pilar 04 · Conversão">
     <div class="glow o"></div>
     <div class="ghostnum">04</div>
-    <div class="kicker">Quarto pilar</div>
-    <div class="name">Conversão</div>
-    <div class="bridge">Estruturei o produto e recebi visita. <b>Agora eu penso em venda</b> — mas não só a primeira. A segunda, a terceira. Aqui eu penso em quanto vou vender, lucrar e construir marca em cima de cada cliente.</div>
+    <div class="cover-inner">
+      <div class="kicker">Quarto pilar</div>
+      <div class="name">Conversão</div>
+      <div class="bridge">Estruturei o produto e recebi visita. <b>Agora eu penso em venda</b> — mas não só a primeira. Aqui eu penso em quanto vou vender, lucrar e construir marca em cima de cada cliente.</div>
+    </div>
   </section>
 
-  <!-- 24 LTV mini-explicação -->
   <section class="slide mid" data-phase="Pilar 04 · Conversão">
     <div class="glow p"></div>
     <div class="eyebrow">Uma palavra que muda o jogo</div>
     <h2 class="xl">LTV</h2>
-    <p class="body ink" style="margin-top:3vh;max-width:58ch">É o valor que o cliente gasta na sua loja <b>ao longo do tempo</b> — não numa compra só, mas em todas que ele fizer com você. Quantos de vocês param pra pensar nesse número?</p>
+    <p class="body ink" style="margin-top:3vh;max-width:56ch">É, basicamente, <b>quanto o seu cliente volta a comprar com você</b> ao longo do tempo — não numa compra só, mas em todas que ele fizer. Quantos de vocês param pra pensar nesse número?</p>
   </section>
 
-  <!-- 25 PIRÂMIDE + FUNIL (contextualizado) -->
   <section class="slide" data-phase="Pilar 04 · Conversão">
     <div class="eyebrow">Pra converter, eu preciso das duas coisas</div>
     <div class="duo">
@@ -468,7 +430,6 @@
     </div>
   </section>
 
-  <!-- 26 VENDER É NÚMERO -->
   <section class="slide mid" data-phase="Pilar 04 · Conversão">
     <div class="glow o"></div>
     <div class="quote-mark">&ldquo;</div>
@@ -476,34 +437,36 @@
     <p class="body ink" style="margin-top:3vh;max-width:60ch">Qual a porcentagem saudável de cada etapa do meu funil? É <b>em cima desse número</b> que eu trabalho. Se eu entendo os meus números, eu vendo, eu escalo, eu aumento o faturamento e melhoro a margem. Sem eles, é achismo.</p>
   </section>
 
-  <!-- 27 O CUSTO DO CLIENTE (exemplo concreto) -->
   <section class="slide" data-phase="Pilar 04 · Conversão">
-    <div class="eyebrow">Todo cliente que você compra tem um custo</div>
+    <div class="eyebrow">Todo cliente que você traz tem um custo</div>
     <div class="calc">
       <div class="step"><div class="lab">Primeira venda</div><div class="v">R$ 50</div><div class="sub">você gastou R$ 5 pra trazer esse cliente</div></div>
       <div class="arrow">→</div>
       <div class="step"><div class="lab">Custo do cliente</div><div class="v cost">R$ 5</div><div class="sub">esse é o custo dele — por enquanto</div></div>
       <div class="arrow">→</div>
-      <div class="step"><div class="lab">Ele volta e compra +R$ 50</div><div class="v gain">R$ 100</div><div class="sub">mesmo custo de R$ 5 — mas o dobro de retorno</div></div>
+      <div class="step"><div class="lab">Ele volta e compra +R$ 50</div><div class="v gain">R$ 100</div><div class="sub">mesmo custo de R$ 5 — o dobro de retorno</div></div>
     </div>
-    <p class="body" style="max-width:76ch">Quem não olha o cliente <b>no longo prazo</b> acha que ele é sempre caro. A <span class="o">taxa de repetição de pedidos</span>, lá no painel da Shopee, te mostra quanto você vende pra quem já é seu cliente. Você olha esse número?</p>
+    <p class="body" style="max-width:76ch">Quem não olha o cliente <b>no longo prazo</b> acha que ele é sempre caro. A <span class="o">taxa de repetição de pedidos</span>, no painel da Shopee, te mostra quanto você vende pra quem já é seu cliente. Você olha esse número?</p>
   </section>
 
-  <!-- 28 CONVERTER É CONSTRUIR MARCA (cadeia) -->
+  <section class="slide" data-phase="Pilar 04 · Conversão">
+    <div class="glow o"></div>
+    <div class="eyebrow">O verdadeiro retorno do cliente</div>
+    <h2 class="lg" style="max-width:26ch">O melhor cliente<br>não é o que <span class="o">volta.</span><br>É o que <span class="o">indica.</span></h2>
+    <p class="body ink" style="margin-top:3vh;max-width:68ch">Aquele cliente que você trouxe por R$ 5 vira fã da sua marca — e o retorno dele não é só a recompra. Ele volta com pedido maior, <b>e ele indica</b>: compartilha o link, manda a foto pra amiga, e a amiga pede onde comprou. Um cliente que você pagou pra trazer começa a trazer clientes <b>de graça.</b></p>
+  </section>
+
   <section class="slide" data-phase="Pilar 04 · Conversão">
     <div class="eyebrow">Converter não termina na venda</div>
-    <h2 class="md" style="margin-bottom:1vh;max-width:30ch">A venda de hoje planta a próxima. É assim que se constrói uma marca:</h2>
-    <div class="rows" style="flex:none;margin-top:1vh">
+    <h2 class="md" style="margin-bottom:1vh;max-width:32ch">A venda de hoje planta a próxima. Assim se constrói uma marca:</h2>
+    <div class="rows tight" style="margin-top:1vh">
       <div class="row"><span class="rk">Avaliação</span><span class="rd">Cliente satisfeito avalia — e a avaliação convence o próximo por você.</span></div>
       <div class="row"><span class="rk">Prova social</span><span class="rd">Gente real falando bem gera confiança em quem ainda não comprou.</span></div>
       <div class="row"><span class="rk">Recompra &amp; LTV</span><span class="rd">O cliente volta, compra de novo, e passa a valer muito mais pra você.</span></div>
-      <div class="row"><span class="rk">Fã da marca</span><span class="rd">No fim, ele vira fã — e um fã <b>leva o seu produto pra mais gente.</b> Quanto mais fã, mais gente te conhecendo.</span></div>
+      <div class="row"><span class="rk">Fã da marca</span><span class="rd">No fim, ele vira fã — e um fã <b>leva o seu produto pra mais gente.</b></span></div>
     </div>
   </section>
 
-  <!-- ================= FECHAMENTO ================= -->
-
-  <!-- 29 RECAP LIMPO -->
   <section class="slide" data-phase="Fechamento">
     <div class="glow o"></div>
     <div class="eyebrow">Os 4 Pilares, do jeito simples</div>
@@ -515,19 +478,18 @@
     </div>
   </section>
 
-  <!-- 30 CTA -->
   <section class="slide mid" data-phase="Fechamento">
     <div class="glow o"></div><div class="glow p"></div>
-    <div class="eyebrow">Agora é a sua vez</div>
+    <div class="eyebrow">Trate sua loja como uma empresa</div>
     <h2 class="xl">Pare de vender<br>no <span class="o">escuro.</span></h2>
-    <p class="body ink" style="margin-top:3vh;max-width:50ch">Aplique os 4 pilares na sua loja — na ordem. Constrói a base, e a venda vem como consequência.</p>
-    <div class="brandline"><b>@karinaleite</b> <span class="dot"></span> Efeito Vendas <span class="dot"></span> Seller.IA <span class="note">(ajuste o @ e o convite final)</span></div>
+    <p class="body ink" style="margin-top:3vh;max-width:52ch">Construa a base, na ordem, e a venda vem como consequência. Não é sorte — é sistema.</p>
+    <div class="brandline"><span class="dot"></span> Karina Leite · Efeito Vendas</div>
   </section>
 
 </div>
 
 <div class="chrome">
-  <div class="counter"><b id="cur">01</b> / <span id="total">30</span></div>
+  <div class="counter"><b id="cur">01</b> / <span id="total">33</span></div>
   <div class="phase" id="phase">Abertura</div>
 </div>
 <div class="navbtns">
